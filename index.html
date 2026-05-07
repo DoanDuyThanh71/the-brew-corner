@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Brew Corner — Cà Phê Specialty & Không Gian Làm Việc</title>
+  <meta name="description" content="The Brew Corner — Cà phê specialty, không gian ấm cúng tại 52 Nguyễn Huệ, Q1, TP.HCM. Mở cửa 7h–22h hằng ngày." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --primary:   #78350F;
+      --secondary: #92400E;
+      --cta:       #D97706;
+      --gold:      #FBBF24;
+      --bg-warm:   #FFFBF2;
+      --bg-light:  #FEF3C7;
+      --bg-dark:   #1C0A00;
+      --text-dark: #451A03;
+      --text-mid:  #78350F;
+      --text-mute: #A16207;
+      --white:     #FFFFFF;
+      --radius:    12px;
+      --shadow-sm: 0 2px 12px rgba(120,53,15,.08);
+      --shadow-md: 0 8px 32px rgba(120,53,15,.14);
+      --shadow-lg: 0 20px 60px rgba(120,53,15,.18);
+      --transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Karla', sans-serif;
+      background: var(--bg-warm);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== Typography ===== */
+    .display { font-family: 'Playfair Display SC', serif; }
+    .serif   { font-family: 'Playfair Display', serif; }
+    h1, h2, h3 { line-height: 1.2; }
+
+    /* ===== Utility ===== */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 96px 0; }
+    .section-sm { padding: 64px 0; }
+    .text-center{ text-align: center; }
+
+    .tag {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cta);
+      background: #FEF3C7;
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-family: 'Playfair Display SC', serif;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-mute);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+    .section-sub.center { margin: 0 auto; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Karla', sans-serif;
+      font-weight: 600; font-size: .95rem;
+      padding: 14px 28px;
+      border-radius: 99px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--cta); color: var(--white);
+      border-color: var(--cta);
+    }
+    .btn-primary:hover {
+      background: #B45309; border-color: #B45309;
+      transform: translateY(-2px); box-shadow: var(--shadow-md);
+    }
+    .btn-outline {
+      background: transparent; color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary); color: var(--white);
+      transform: translateY(-2px);
+    }
+    .btn-white {
+      background: var(--white); color: var(--primary);
+      border-color: var(--white);
+    }
+    .btn-white:hover {
+      background: var(--bg-light); transform: translateY(-2px);
+    }
+
+    /* ===== Scroll animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ===========================
+       NAVBAR
+    =========================== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: var(--transition);
+      padding: 20px 0;
+    }
+    #navbar.scrolled {
+      background: rgba(255,251,242,.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 12px 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      background: var(--cta);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .nav-logo-text {
+      font-family: 'Playfair Display SC', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      line-height: 1.2;
+      transition: var(--transition);
+    }
+    #navbar.scrolled .nav-logo-text { color: var(--text-dark); }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500;
+      color: rgba(255,255,255,.9);
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: var(--transition);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    #navbar.scrolled .nav-links a { color: var(--text-dark); }
+    .nav-cta {
+      background: var(--cta); color: var(--white) !important;
+      padding: 8px 20px; border-radius: 99px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #B45309 !important; }
+    .nav-cta::after { display: none !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white);
+      transition: var(--transition);
+    }
+    #navbar.scrolled .nav-hamburger span { background: var(--text-dark); }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(160deg, rgba(28,10,0,.75) 0%, rgba(120,53,15,.5) 100%),
+        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&q=80') center/cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 60%, rgba(251,191,36,.08) 0%, transparent 60%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 120px 0 80px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(251,191,36,.15);
+      border: 1px solid rgba(251,191,36,.3);
+      color: var(--gold);
+      padding: 6px 16px; border-radius: 99px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+    .hero-title {
+      font-family: 'Playfair Display SC', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero-title em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,.75);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+      margin-bottom: 60px;
+    }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 40px;
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display SC', serif;
+      font-size: 2rem; color: var(--gold);
+    }
+    .hero-stat-label {
+      font-size: .82rem; color: rgba(255,255,255,.6);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.5); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll svg { width: 20px; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===========================
+       MARQUEE STRIP
+    =========================== */
+    .marquee-strip {
+      background: var(--primary);
+      padding: 14px 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 24px;
+      padding: 0 32px;
+      font-size: .82rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      white-space: nowrap;
+    }
+    .marquee-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ===========================
+       ABOUT
+    =========================== */
+    #about {
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-image-main {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-image-badge {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--cta);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .about-image-badge strong {
+      display: block;
+      font-family: 'Playfair Display SC', serif;
+      font-size: 2rem;
+    }
+    .about-image-badge span { font-size: .82rem; opacity: .85; }
+    .about-text { }
+    .about-features {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 36px;
+    }
+    .about-feature {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--bg-warm);
+      padding: 16px; border-radius: var(--radius);
+    }
+    .about-feature-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--bg-light);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .about-feature h4 { font-size: .9rem; font-weight: 700; margin-bottom: 2px; }
+    .about-feature p  { font-size: .82rem; color: var(--text-mute); line-height: 1.4; }
+
+    /* ===========================
+       MENU
+    =========================== */
+    #menu {
+      background: var(--bg-warm);
+    }
+    .menu-header { text-align: center; margin-bottom: 48px; }
+    .menu-tabs {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-bottom: 40px;
+    }
+    .menu-tab {
+      padding: 10px 22px;
+      border-radius: 99px;
+      border: 1.5px solid #E7D5C3;
+      background: var(--white);
+      font-family: 'Karla', sans-serif;
+      font-size: .9rem; font-weight: 600;
+      color: var(--text-mute);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .menu-tab:hover { border-color: var(--cta); color: var(--cta); }
+    .menu-tab.active {
+      background: var(--primary); color: var(--white); border-color: var(--primary);
+    }
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid #F5EAD8;
+    }
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .menu-card-img {
+      width: 100%; height: 180px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #FDE68A, #FCA5A5, #A78BFA);
+    }
+    .menu-card-img.type-vn    { background: linear-gradient(135deg, #92400E, #78350F); }
+    .menu-card-img.type-sp    { background: linear-gradient(135deg, #1C0A00, #3B1F0A); }
+    .menu-card-img.type-tea   { background: linear-gradient(135deg, #065F46, #059669); }
+    .menu-card-img.type-food  { background: linear-gradient(135deg, #92400E, #D97706); }
+    .menu-card-img-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      backdrop-filter: none;
+    }
+    .menu-card-body { padding: 16px 20px 20px; }
+    .menu-card-name {
+      font-weight: 700; font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .menu-card-desc {
+      font-size: .82rem; color: var(--text-mute);
+      line-height: 1.5; margin-bottom: 14px;
+    }
+    .menu-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .menu-card-price {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600; font-size: 1.1rem; color: var(--primary);
+    }
+    .menu-card-tag {
+      font-size: .72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 99px;
+    }
+    .menu-card-tag.available    { background: #D1FAE5; color: #065F46; }
+    .menu-card-tag.no-delivery  { background: #FEE2E2; color: #991B1B; }
+
+    .menu-note {
+      margin-top: 32px;
+      background: var(--bg-light);
+      border-left: 4px solid var(--cta);
+      padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .9rem; color: var(--text-dark);
+      line-height: 1.7;
+    }
+    .menu-note strong { color: var(--primary); }
+
+    /* ===========================
+       COMBOS
+    =========================== */
+    #combos {
+      background: var(--bg-dark);
+      position: relative; overflow: hidden;
+    }
+    #combos::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(251,191,36,.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(120,53,15,.15) 0%, transparent 50%);
+    }
+    .combos-header { text-align: center; margin-bottom: 56px; position: relative; }
+    .combos-header .section-title { color: var(--white); }
+    .combos-header .section-sub   { color: rgba(255,255,255,.55); }
+    .combos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px; position: relative;
+    }
+    .combo-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 28px;
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .combo-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cta), var(--gold));
+      opacity: 0; transition: var(--transition);
+    }
+    .combo-card:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(251,191,36,.2);
+      transform: translateY(-4px);
+    }
+    .combo-card:hover::before { opacity: 1; }
+    .combo-card-icon {
+      font-size: 2.2rem; margin-bottom: 16px;
+    }
+    .combo-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .combo-card-desc {
+      font-size: .88rem; color: rgba(255,255,255,.55);
+      line-height: 1.6; margin-bottom: 20px;
+    }
+    .combo-card-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .combo-save {
+      font-family: 'Playfair Display SC', serif;
+      font-size: 1.4rem; color: var(--gold);
+    }
+    .combo-condition {
+      font-size: .75rem; color: rgba(255,255,255,.4);
+      max-width: 140px; text-align: right; line-height: 1.4;
+    }
+
+    /* ===========================
+       TOPPING BAR
+    =========================== */
+    #customize {
+      background: var(--white);
+    }
+    .customize-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .customize-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .option-pill {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--bg-warm);
+      border: 1.5px solid #F0DEC8;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      transition: var(--transition);
+    }
+    .option-pill:hover {
+      border-color: var(--cta); background: var(--bg-light);
+    }
+    .option-pill-name { font-size: .88rem; font-weight: 600; }
+    .option-pill-price { font-size: .82rem; color: var(--cta); font-weight: 700; }
+    .option-pill-free  { font-size: .75rem; color: #059669; background: #D1FAE5; padding: 2px 8px; border-radius: 99px; }
+
+    /* ===========================
+       AMENITIES
+    =========================== */
+    #amenities {
+      background: var(--bg-warm);
+    }
+    .amenities-header { text-align: center; margin-bottom: 56px; }
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .amenity-card {
+      text-align: center;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #F5EAD8;
+      transition: var(--transition);
+    }
+    .amenity-card:hover {
+      transform: translateY(-4px); box-shadow: var(--shadow-md);
+    }
+    .amenity-icon {
+      font-size: 2.4rem; margin-bottom: 16px;
+    }
+    .amenity-title { font-weight: 700; margin-bottom: 8px; }
+    .amenity-desc  { font-size: .85rem; color: var(--text-mute); line-height: 1.6; }
+
+    /* ===========================
+       HOURS & LOCATION
+    =========================== */
+    #location {
+      background: var(--primary);
+      position: relative; overflow: hidden;
+    }
+    #location::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(251,191,36,.08), transparent 60%);
+    }
+    .location-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+      position: relative;
+    }
+    .location-left .section-title { color: var(--white); margin-bottom: 32px; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table td { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .hours-table td:first-child { color: rgba(255,255,255,.65); font-size: .9rem; }
+    .hours-table td:last-child  {
+      color: var(--white); font-weight: 700; text-align: right;
+      font-family: 'Playfair Display', serif;
+    }
+    .contact-list { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+    .contact-item {
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .contact-item-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(255,255,255,.08);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-item-label { font-size: .75rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .06em; }
+    .contact-item-value { font-size: .95rem; color: var(--white); font-weight: 600; }
+
+    .location-right { }
+    .location-map {
+      width: 100%; height: 400px;
+      border-radius: 20px; overflow: hidden;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      position: relative;
+    }
+    .location-map iframe {
+      width: 100%; height: 100%; border: 0; border-radius: 20px;
+    }
+    .location-chips {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;
+    }
+    .location-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.7);
+      padding: 8px 16px; border-radius: 99px;
+      font-size: .82rem; font-weight: 500;
+    }
+
+    /* ===========================
+       FAQ
+    =========================== */
+    #faq {
+      background: var(--white);
+    }
+    .faq-header { text-align: center; margin-bottom: 48px; }
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid #F0DEC8;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%; text-align: left;
+      background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0; gap: 16px;
+      font-family: 'Karla', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--text-dark);
+    }
+    .faq-question:hover { color: var(--primary); }
+    .faq-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      background: var(--bg-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: var(--transition);
+      color: var(--primary);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--cta); color: white; }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+    }
+    .faq-answer-inner {
+      padding-bottom: 20px;
+      font-size: .95rem; color: var(--text-mute); line-height: 1.75;
+    }
+    .faq-item.open .faq-answer { max-height: 400px; }
+
+    /* ===========================
+       CTA STRIP
+    =========================== */
+    #cta-strip {
+      background: linear-gradient(135deg, var(--cta) 0%, #B45309 100%);
+      text-align: center; padding: 80px 0;
+    }
+    #cta-strip h2 {
+      font-family: 'Playfair Display SC', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white); margin-bottom: 16px;
+    }
+    #cta-strip p {
+      font-size: 1.05rem; color: rgba(255,255,255,.8);
+      max-width: 500px; margin: 0 auto 36px;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--bg-dark);
+      padding: 64px 0 32px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .footer-brand-name {
+      font-family: 'Playfair Display SC', serif;
+      font-size: 1.4rem; color: var(--white); margin-bottom: 12px;
+    }
+    .footer-brand-desc {
+      font-size: .88rem; color: rgba(255,255,255,.4);
+      line-height: 1.7; margin-bottom: 20px;
+    }
+    .footer-social {
+      display: flex; gap: 10px;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.07);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: rgba(255,255,255,.5);
+      transition: var(--transition);
+    }
+    .footer-social a:hover { background: var(--cta); color: white; }
+    .footer-col h4 {
+      font-size: .8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: rgba(255,255,255,.35);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: .88rem; color: rgba(255,255,255,.5);
+      transition: var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy {
+      font-size: .82rem; color: rgba(255,255,255,.3);
+    }
+    .footer-copy a { color: var(--gold); }
+    .footer-badges {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .footer-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .75rem; color: rgba(255,255,255,.3);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-image-main { height: 380px; }
+      .about-image-badge { right: 0; bottom: -16px; }
+      .location-grid  { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-stats { gap: 24px; }
+      .about-features { grid-template-columns: 1fr; }
+      .customize-grid { grid-template-columns: 1fr; }
+      .customize-options { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .amenities-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===========================
+       MOBILE NAV DRAWER
+    =========================== */
+    .nav-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 280px;
+      background: var(--white);
+      z-index: 2000;
+      padding: 24px;
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      box-shadow: -8px 0 40px rgba(0,0,0,.15);
+    }
+    .nav-drawer.open { transform: none; }
+    .nav-drawer-close {
+      display: flex; justify-content: flex-end; margin-bottom: 32px;
+    }
+    .nav-drawer-close button {
+      background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark);
+    }
+    .nav-drawer ul { display: flex; flex-direction: column; gap: 4px; }
+    .nav-drawer ul a {
+      display: block; padding: 12px 16px; border-radius: 10px;
+      font-size: 1rem; font-weight: 600; color: var(--text-dark);
+      transition: var(--transition);
+    }
+    .nav-drawer ul a:hover { background: var(--bg-warm); color: var(--primary); }
+    .nav-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.4);
+      z-index: 1999; opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: all; }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">☕</div>
+      <div class="nav-logo-text">The Brew Corner</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">Câu chuyện</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#combos">Ưu đãi</a></li>
+      <li><a href="#amenities">Tiện ích</a></li>
+      <li><a href="#location">Vị trí</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="tel:02838221234" class="nav-cta">Gọi ngay</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-close"><button id="drawerClose">✕</button></div>
+  <ul>
+    <li><a href="#about">Câu chuyện</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#combos">Ưu đãi</a></li>
+    <li><a href="#amenities">Tiện ích</a></li>
+    <li><a href="#location">Vị trí</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="tel:02838221234" style="color:var(--cta)">📞 028 3822 1234</a></li>
+  </ul>
+</div>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <div class="hero-badge"><span></span> Mở cửa 7:00 – 22:00 hằng ngày</div>
+    <h1 class="hero-title">
+      Nơi mỗi ly cà phê<br>
+      kể một <em>câu chuyện</em>
+    </h1>
+    <p class="hero-tagline">
+      Specialty coffee, không gian ấm cúng, WiFi tốc độ cao — tất cả tại
+      52 Nguyễn Huệ, Quận 1, TP.HCM.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">Xem Menu ↓</a>
+      <a href="#location" class="btn btn-white">Chỉ đường</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">65</div>
+        <div class="hero-stat-label">Chỗ ngồi</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">22+</div>
+        <div class="hero-stat-label">Đồ uống</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">7h</div>
+        <div class="hero-stat-label">Mở cửa sớm</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3km</div>
+        <div class="hero-stat-label">Giao hàng</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== MARQUEE ========== -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- Items duplicated in JS -->
+    <div class="marquee-item">Cold Brew Arabica<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Specialty Espresso<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Robusta Đắk Lắk<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Latte Art<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Croissant Bơ Pháp<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Free WiFi<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Happy Hour 14–16h<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Phòng Họp 8–12 Người<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Matcha Ceremonial<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Oat Milk · Almond Milk<span class="marquee-dot"></span></div>
+    <!-- Duplicate -->
+    <div class="marquee-item">Cold Brew Arabica<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Specialty Espresso<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Robusta Đắk Lắk<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Latte Art<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Croissant Bơ Pháp<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Free WiFi<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Happy Hour 14–16h<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Phòng Họp 8–12 Người<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Matcha Ceremonial<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Oat Milk · Almond Milk<span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- ========== ABOUT ========== -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=900&q=80"
+          alt="Không gian The Brew Corner"
+          class="about-image-main"
+        />
+        <div class="about-image-badge">
+          <strong>2018</strong>
+          <span>Năm thành lập</span>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <div class="tag">Về chúng tôi</div>
+        <h2 class="section-title">Không chỉ là<br>một tách cà phê</h2>
+        <p class="section-sub" style="margin-bottom:16px">
+          The Brew Corner ra đời từ niềm đam mê với cà phê specialty và mong muốn tạo ra
+          một không gian mà người Sài Gòn có thể thực sự <em>dừng lại</em> — làm việc,
+          gặp gỡ, hoặc đơn giản là ngồi tận hưởng một ly cà phê tốt.
+        </p>
+        <p style="color:var(--text-mute); font-size:.95rem; line-height:1.7; margin-bottom:8px">
+          Hạt cà phê được chọn lọc kỹ lưỡng: Robusta Đắk Lắk rang vừa cho dòng
+          cà phê Việt, blend Arabica Ethiopia × Colombia cho espresso specialty.
+          Cold brew ủ 12 tiếng mỗi ngày.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">🫘</div>
+            <div>
+              <h4>Hạt chọn lọc</h4>
+              <p>Arabica 70% Ethiopia Yirgacheffe + 30% Colombia</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🏠</div>
+            <div>
+              <h4>65 chỗ ngồi</h4>
+              <p>Tầng 1 nhộn nhịp · Tầng 2 yên tĩnh làm việc</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🚴</div>
+            <div>
+              <h4>Giao hàng 3km</h4>
+              <p>Phí 15k · Đơn tối thiểu 80k · 30–45 phút</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🎂</div>
+            <div>
+              <h4>Tổ chức tiệc</h4>
+              <p>Tối đa 25 khách, setup riêng từ 300k</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MENU ========== -->
+<section id="menu" class="section">
+  <div class="container">
+    <div class="menu-header reveal">
+      <div class="tag">Thực đơn</div>
+      <h2 class="section-title">Chọn theo sở thích<br>của bạn</h2>
+      <p class="section-sub center" style="margin-top:8px">
+        Từ cà phê phin truyền thống đến espresso specialty — tất cả được pha
+        bởi barista được đào tạo bài bản.
+      </p>
+    </div>
+
+    <div class="menu-tabs reveal">
+      <button class="menu-tab active" data-tab="vn">☕ Cà Phê VN</button>
+      <button class="menu-tab" data-tab="sp">✨ Specialty</button>
+      <button class="menu-tab" data-tab="tea">🍵 Trà & Đồ Uống Khác</button>
+      <button class="menu-tab" data-tab="food">🥐 Bánh & Ăn Nhẹ</button>
+    </div>
+
+    <!-- Vietnamese Coffee -->
+    <div class="menu-panel active" id="panel-vn">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-vn"><div class="menu-card-img-inner">☕</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Cà phê đen đá / nóng</div>
+            <div class="menu-card-desc">Robusta Đắk Lắk phin truyền thống — đậm đà, mạnh mẽ</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">25.000 – 30.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img type-vn"><div class="menu-card-img-inner">🥛</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Cà phê sữa đá / nóng</div>
+            <div class="menu-card-desc">Cà phê đen + sữa đặc Ông Thọ — vị ngọt quen thuộc</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">30.000 – 35.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img type-vn"><div class="menu-card-img-inner">🤍</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Bạc xỉu</div>
+            <div class="menu-card-desc">Nhiều sữa, ít cà phê — vị nhẹ nhàng, thích hợp buổi sáng</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">35.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img type-vn"><div class="menu-card-img-inner">🥚</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Cà phê trứng</div>
+            <div class="menu-card-desc">Cà phê + kem trứng đánh bông, phục vụ nóng — đặc sản Hà Nội</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">45.000đ</div>
+              <span class="menu-card-tag no-delivery">Tại chỗ</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-vn"><div class="menu-card-img-inner">🧊</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Cold Brew</div>
+            <div class="menu-card-desc">Arabica ủ lạnh 12 tiếng — vị đậm mượt, ít chua, ít đắng</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">40.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialty -->
+    <div class="menu-panel" id="panel-sp">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-sp"><div class="menu-card-img-inner">☕</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Americano</div>
+            <div class="menu-card-desc">Espresso + nước nóng — vị thanh, nhẹ hơn espresso thuần</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">45.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img type-sp"><div class="menu-card-img-inner">🫧</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Cappuccino</div>
+            <div class="menu-card-desc">Espresso + sữa tươi đánh bông mịn — cân bằng hoàn hảo</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">55.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img type-sp"><div class="menu-card-img-inner">🎨</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Latte</div>
+            <div class="menu-card-desc">Espresso + nhiều sữa, latte art thủ công — mịn màng, nhẹ nhàng</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">55.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img type-sp"><div class="menu-card-img-inner">💪</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Flat White</div>
+            <div class="menu-card-desc">Double shot + sữa vi bọt — mạnh hơn latte, dành cho người nghiện</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">60.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-sp"><div class="menu-card-img-inner">🍋</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Espresso Tonic</div>
+            <div class="menu-card-desc">Espresso + tonic water + đá — vị chua thanh, sảng khoái</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">60.000đ</div>
+              <span class="menu-card-tag no-delivery">Tại chỗ</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img type-sp"><div class="menu-card-img-inner">🍫</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Mocha</div>
+            <div class="menu-card-desc">Espresso + chocolate + sữa — ngọt ngào, ấm áp</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">60.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tea & Others -->
+    <div class="menu-panel" id="panel-tea">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-tea"><div class="menu-card-img-inner">🍑</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Trà đào cam sả</div>
+            <div class="menu-card-desc">Đào tươi + lát cam + sả tươi — thanh mát, thơm dịu</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">45.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img type-tea"><div class="menu-card-img-inner">🍵</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Matcha Latte</div>
+            <div class="menu-card-desc">Matcha Nhật ceremonial grade — màu đẹp, vị đậm umami</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">55.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img type-tea"><div class="menu-card-img-inner">🧋</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Trà sữa trân châu</div>
+            <div class="menu-card-desc">Trân châu đen nấu mềm mỗi ngày — không bột pha sẵn</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">50.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img type-tea"><div class="menu-card-img-inner">🍊</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Nước ép cam tươi</div>
+            <div class="menu-card-desc">Cam vắt tay, không thêm đường — vitamin C tự nhiên</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">45.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-tea"><div class="menu-card-img-inner">🫧</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Soda chanh muối</div>
+            <div class="menu-card-desc">Chanh tươi + muối Himalaya + soda — giải khát tức thì</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">35.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food -->
+    <div class="menu-panel" id="panel-food">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <div class="menu-card-img type-food"><div class="menu-card-img-inner">🥐</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Croissant bơ Pháp</div>
+            <div class="menu-card-desc">Nướng tươi mỗi sáng, dùng bơ AOP chuẩn Pháp — giòn rụm</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">35.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img type-food"><div class="menu-card-img-inner">🍰</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Bánh Tiramisu</div>
+            <div class="menu-card-desc">Mascarpone Ý + espresso — khẩu phần 1 người, đậm vị espresso</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">55.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img type-food"><div class="menu-card-img-inner">🥑</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Avocado Toast</div>
+            <div class="menu-card-desc">Bánh mì sourdough + bơ bơ tươi + trứng ốp — no lâu, ngon</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">65.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img type-food"><div class="menu-card-img-inner">🍋</div></div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Cheesecake chanh dây</div>
+            <div class="menu-card-desc">No-bake cheesecake — vị chua nhẹ, béo mịn, không ngán</div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price">55.000đ</div>
+              <span class="menu-card-tag available">Giao được</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-note reveal">
+      <strong>Tuỳ chỉnh miễn phí:</strong> Ít đường · Không đường · Ít đá · Không đá &nbsp;|&nbsp;
+      <strong>Phụ thu:</strong> Oat milk / Almond milk +15k · Shot espresso thêm +10k · Upsize M→L +10k · Topping (trân châu, thạch) +10k/loại &nbsp;|&nbsp;
+      <strong>Free refill</strong> cà phê đen & trà đen khi ngồi tại chỗ
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMBOS ========== -->
+<section id="combos" class="section">
+  <div class="container">
+    <div class="combos-header reveal">
+      <div class="tag" style="background:rgba(251,191,36,.15); color:var(--gold)">Ưu đãi</div>
+      <h2 class="section-title">Tiết kiệm hơn<br>mỗi ngày</h2>
+      <p class="section-sub center" style="color:rgba(255,255,255,.5)">
+        Nhiều combo và chương trình ưu đãi hấp dẫn, áp dụng hằng ngày hoặc theo giờ.
+      </p>
+    </div>
+    <div class="combos-grid">
+      <div class="combo-card reveal">
+        <div class="combo-card-icon">🌅</div>
+        <div class="combo-card-name">Combo Sáng</div>
+        <div class="combo-card-desc">1 đồ uống bất kỳ + 1 croissant bơ Pháp nướng tươi. Bắt đầu ngày mới ngon lành.</div>
+        <div class="combo-card-bottom">
+          <div class="combo-save">-15%</div>
+          <div class="combo-condition">7h – 10h hằng ngày</div>
+        </div>
+      </div>
+      <div class="combo-card reveal reveal-delay-1">
+        <div class="combo-card-icon">⚡</div>
+        <div class="combo-card-name">Happy Hour</div>
+        <div class="combo-card-desc">Mua 2 tặng 1 đồ uống cùng loại. Lý tưởng cho buổi chiều cùng đồng nghiệp hay bạn bè.</div>
+        <div class="combo-card-bottom">
+          <div class="combo-save">-33%</div>
+          <div class="combo-condition">14h – 16h<br>Thứ 2 – Thứ 6</div>
+        </div>
+      </div>
+      <div class="combo-card reveal reveal-delay-2">
+        <div class="combo-card-icon">💻</div>
+        <div class="combo-card-name">Set Làm Việc</div>
+        <div class="combo-card-desc">Cold Brew + Avocado Toast + 2h không gian làm việc thoải mái với WiFi ổn định.</div>
+        <div class="combo-card-bottom">
+          <div class="combo-save">89.000đ</div>
+          <div class="combo-condition">Tiết kiệm 16k<br>Cả ngày</div>
+        </div>
+      </div>
+      <div class="combo-card reveal reveal-delay-3">
+        <div class="combo-card-icon">🎂</div>
+        <div class="combo-card-name">Sinh Nhật</div>
+        <div class="combo-card-desc">Tặng 1 cupcake miễn phí vào đúng ngày sinh nhật khi xuất trình CMND/CCCD.</div>
+        <div class="combo-card-bottom">
+          <div class="combo-save">Miễn phí</div>
+          <div class="combo-condition">Ngày sinh nhật<br>1 lần/năm</div>
+        </div>
+      </div>
+      <div class="combo-card reveal">
+        <div class="combo-card-icon">🎓</div>
+        <div class="combo-card-name">Sinh Viên & Giáo Viên</div>
+        <div class="combo-card-desc">Giảm 10% tất cả món khi xuất trình thẻ sinh viên hoặc thẻ giáo viên hợp lệ.</div>
+        <div class="combo-card-bottom">
+          <div class="combo-save">-10%</div>
+          <div class="combo-condition">Không áp dụng<br>trong Happy Hour</div>
+        </div>
+      </div>
+      <div class="combo-card reveal reveal-delay-1">
+        <div class="combo-card-icon">⭐</div>
+        <div class="combo-card-name">Thẻ Thành Viên</div>
+        <div class="combo-card-desc">Tích điểm 1đ = 100đ chi tiêu. Đổi quà hấp dẫn khi đủ 500 điểm. Đăng ký tại quầy.</div>
+        <div class="combo-card-bottom">
+          <div class="combo-save">500đ = Quà</div>
+          <div class="combo-condition">Đăng ký tại quầy<br>hoặc Zalo OA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CUSTOMIZE ========== -->
+<section id="customize" class="section">
+  <div class="container">
+    <div class="customize-grid">
+      <div class="reveal">
+        <div class="tag">Tuỳ Chỉnh</div>
+        <h2 class="section-title">Đồ uống theo<br>ý bạn</h2>
+        <p class="section-sub" style="margin-bottom:32px">
+          Mọi đồ uống đều có thể tuỳ chỉnh — đường, đá, loại sữa, topping.
+          Chỉ cần nói với barista khi order.
+        </p>
+        <a href="tel:02838221234" class="btn btn-outline">📞 Order ngay</a>
+      </div>
+      <div class="customize-options reveal reveal-delay-2">
+        <div class="option-pill">
+          <span class="option-pill-name">🫛 Trân châu đen</span>
+          <span class="option-pill-price">+10k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">☕ Thạch cà phê</span>
+          <span class="option-pill-price">+10k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">🌿 Thạch lá dứa</span>
+          <span class="option-pill-price">+10k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">🧀 Kem phô mai</span>
+          <span class="option-pill-price">+15k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">🌾 Oat milk</span>
+          <span class="option-pill-price">+15k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">🌰 Almond milk</span>
+          <span class="option-pill-price">+15k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">📏 Upsize M → L</span>
+          <span class="option-pill-price">+10k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">💧 Ít đường / đá</span>
+          <span class="option-pill-free">Miễn phí</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">⚡ Shot thêm</span>
+          <span class="option-pill-price">+10k</span>
+        </div>
+        <div class="option-pill">
+          <span class="option-pill-name">🥛 Sữa tươi không đường</span>
+          <span class="option-pill-free">Miễn phí</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AMENITIES ========== -->
+<section id="amenities" class="section">
+  <div class="container">
+    <div class="amenities-header reveal">
+      <div class="tag">Tiện Ích</div>
+      <h2 class="section-title">Không gian đúng nghĩa<br>của bạn</h2>
+      <p class="section-sub center">
+        Không chỉ là cà phê — The Brew Corner là nơi làm việc, học tập,
+        gặp gỡ, và nạp lại năng lượng.
+      </p>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">📶</div>
+        <div class="amenity-title">WiFi Tốc Độ Cao</div>
+        <div class="amenity-desc">BrewCorner_Guest · Mật khẩu: coffee2025 · Ổn định cả 2 tầng</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-1">
+        <div class="amenity-icon">🔌</div>
+        <div class="amenity-title">Ổ Cắm Điện</div>
+        <div class="amenity-desc">Mỗi bàn tầng 2 và dọc tường tầng 1 đều có ổ cắm tiện lợi</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-2">
+        <div class="amenity-icon">🤫</div>
+        <div class="amenity-title">Tầng 2 Yên Tĩnh</div>
+        <div class="amenity-desc">20 chỗ ngồi thoải mái, phù hợp làm việc & học tập tập trung</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-3">
+        <div class="amenity-icon">📽️</div>
+        <div class="amenity-title">Phòng Họp Nhỏ</div>
+        <div class="amenity-desc">8–12 người · Màn chiếu + bảng trắng · 200k/giờ gồm 1 đồ uống/người</div>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">🌿</div>
+        <div class="amenity-title">Khu Ngoài Trời</div>
+        <div class="amenity-desc">3 bàn sân trước, không khí thoáng đãng. Không cần đặt trước.</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-1">
+        <div class="amenity-icon">🛵</div>
+        <div class="amenity-title">Bãi Xe Miễn Phí</div>
+        <div class="amenity-desc">Xe máy miễn phí phía sau tòa nhà. Ô tô: bãi xe Nguyễn Huệ 200m.</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-2">
+        <div class="amenity-icon">💳</div>
+        <div class="amenity-title">Nhiều Phương Thức TT</div>
+        <div class="amenity-desc">Tiền mặt · Chuyển khoản · VNPay · MoMo · ZaloPay · Visa/Mastercard</div>
+      </div>
+      <div class="amenity-card reveal reveal-delay-3">
+        <div class="amenity-icon">🚚</div>
+        <div class="amenity-title">Giao Hàng</div>
+        <div class="amenity-desc">GrabFood · ShopeeFood · BeDelivery · Tự giao trong 3km phí 15k</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LOCATION & HOURS ========== -->
+<section id="location" class="section">
+  <div class="container">
+    <div class="location-grid">
+      <div class="location-left reveal">
+        <div class="tag" style="background:rgba(251,191,36,.15);color:var(--gold)">Giờ mở cửa</div>
+        <h2 class="section-title">Ghé thăm chúng tôi</h2>
+        <table class="hours-table">
+          <tbody>
+            <tr><td>Thứ Hai – Thứ Sáu</td><td>07:00 – 22:00</td></tr>
+            <tr><td>Thứ Bảy</td><td>07:00 – 23:00</td></tr>
+            <tr><td>Chủ Nhật</td><td>08:00 – 22:00</td></tr>
+            <tr><td>Ngày lễ</td><td>Mở cửa bình thường</td></tr>
+            <tr style="border:none"><td style="color:rgba(255,255,255,.4);font-size:.82rem">Tết Nguyên Đán</td><td style="color:rgba(255,255,255,.4);font-size:.82rem;text-align:right">Nghỉ lễ</td></tr>
+          </tbody>
+        </table>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Địa chỉ</div>
+              <div class="contact-item-value">52 Nguyễn Huệ, P. Bến Nghé, Q.1, TP.HCM</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Điện thoại</div>
+              <div class="contact-item-value"><a href="tel:02838221234" style="color:var(--white)">028 3822 1234</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value"><a href="mailto:hello@thebrewcorner.vn" style="color:var(--white)">hello@thebrewcorner.vn</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">💬</div>
+            <div>
+              <div class="contact-item-label">Zalo / Facebook</div>
+              <div class="contact-item-value">The Brew Corner · Phản hồi trong 30 phút</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location-right reveal reveal-delay-2">
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4326539!2d106.7017!3d10.7769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTAuNzc2OSwgMTA2LjcwMTc!5e0!3m2!1svi!2svn!4v1683000000000!5m2!1svi!2svn"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="The Brew Corner - 52 Nguyễn Huệ Q.1">
+          </iframe>
+        </div>
+        <div class="location-chips">
+          <div class="location-chip">🚇 Gần ga Metro Bến Thành</div>
+          <div class="location-chip">🏬 Phố đi bộ Nguyễn Huệ</div>
+          <div class="location-chip">🛵 Bãi xe miễn phí</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="faq-header reveal">
+      <div class="tag">Câu Hỏi Thường Gặp</div>
+      <h2 class="section-title">Bạn cần biết gì?</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">
+          Cửa hàng có chỗ đậu xe không?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Có bãi xe máy <strong>miễn phí</strong> phía sau tòa nhà (lối vào từ hẻm 52/1).
+            Xe ô tô có thể đậu tại bãi xe Nguyễn Huệ cách khoảng 200m.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Có thể tổ chức sinh nhật hoặc sự kiện nhỏ không?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Được. The Brew Corner nhận tổ chức tiệc nhỏ tối đa <strong>25 khách</strong>.
+            Vui lòng liên hệ trước ít nhất 3 ngày để đặt chỗ và thống nhất menu.
+            Phí setup 300.000đ đã bao gồm trang trí cơ bản.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Đồ uống có thể tuỳ chỉnh không?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Được, khách có thể yêu cầu: <strong>ít đường / không đường, ít đá / không đá, thêm shot,
+            đổi loại sữa</strong> (oat, almond, tươi). Một số món đặc thù như cà phê trứng hoặc
+            espresso tonic không thể thay đổi công thức cơ bản.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Chính sách đổi trả như thế nào?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Nếu đồ uống làm sai so với yêu cầu hoặc có vấn đề chất lượng, cửa hàng
+            <strong>làm lại hoàn toàn miễn phí</strong>. Trường hợp chất lượng kém (mùi lạ, có dị vật):
+            làm lại + tặng voucher 50.000đ. Không hoàn tiền mặt sau khi đã nhận đồ và uống một phần.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Giao hàng có những khu vực nào?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Giao qua <strong>GrabFood, ShopeeFood, BeDelivery</strong>. Cửa hàng cũng tự vận hành
+            giao trong bán kính 3km, phí 15.000đ, đơn tối thiểu 80.000đ, thời gian 30–45 phút.
+            Lưu ý: một số món đặc thù (cà phê trứng, espresso tonic) không giao do dễ hỏng.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Cửa hàng hỗ trợ thanh toán điện tử không?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Có, chấp nhận: <strong>tiền mặt, chuyển khoản ngân hàng, VNPay, MoMo, ZaloPay,
+            thẻ Visa/Mastercard</strong>. Không thu phí giao dịch điện tử.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Có lưu ý gì về dị ứng thực phẩm không?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <strong>Không gluten:</strong> tránh croissant và avocado toast (bánh mì sourdough).
+            <strong>Không lactose:</strong> đổi sang oat milk hoặc almond milk (+15k).
+            <strong>Ăn chay:</strong> tất cả đồ uống đều ổn, tránh avocado toast (có trứng).
+            <strong>Tiểu đường:</strong> yêu cầu không đường, chọn món không có xi-rô.
+            Vui lòng thông báo với staff khi order để được tư vấn phù hợp.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA STRIP ========== -->
+<section id="cta-strip">
+  <div class="container">
+    <h2>Sẵn sàng thưởng thức?</h2>
+    <p>Ghé The Brew Corner hôm nay — hoặc order ngay trên GrabFood, ShopeeFood!</p>
+    <div class="cta-actions">
+      <a href="https://maps.app.goo.gl/NguyenHue52Q1" class="btn btn-white" target="_blank" rel="noopener">
+        📍 Chỉ đường
+      </a>
+      <a href="tel:02838221234" class="btn btn-outline" style="border-color:white;color:white">
+        📞 Gọi đặt bàn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">The Brew Corner</div>
+        <p class="footer-brand-desc">
+          Specialty coffee & cozy workspace tại trung tâm Sài Gòn.
+          Mỗi ly cà phê là một câu chuyện — ghé thăm chúng tôi hôm nay.
+        </p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="Zalo">Z</a>
+          <a href="#" aria-label="TikTok">♪</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#menu" onclick="switchTab('vn')">Cà Phê Việt Nam</a></li>
+          <li><a href="#menu" onclick="switchTab('sp')">Specialty Coffee</a></li>
+          <li><a href="#menu" onclick="switchTab('tea')">Trà & Đồ Uống</a></li>
+          <li><a href="#menu" onclick="switchTab('food')">Bánh & Ăn Nhẹ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Dịch vụ</h4>
+        <ul>
+          <li><a href="#amenities">Phòng họp</a></li>
+          <li><a href="#amenities">Giao hàng</a></li>
+          <li><a href="#combos">Thẻ thành viên</a></li>
+          <li><a href="#faq">Tổ chức sự kiện</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="tel:02838221234">028 3822 1234</a></li>
+          <li><a href="mailto:hello@thebrewcorner.vn">hello@thebrewcorner.vn</a></li>
+          <li><a href="#location">52 Nguyễn Huệ, Q.1</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2025 The Brew Corner. Thiết kế bởi
+        <a href="#">AI + Claude Code</a>.
+      </div>
+      <div class="footer-badges">
+        <div class="footer-badge">🌱 Cà phê bền vững</div>
+        <div class="footer-badge">♻️ Ly tái sử dụng</div>
+        <div class="footer-badge">🇻🇳 Made in Vietnam</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+  // --- Navbar scroll ---
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // --- Hamburger / Drawer ---
+  const hamburger   = document.getElementById('hamburger');
+  const navDrawer   = document.getElementById('navDrawer');
+  const navOverlay  = document.getElementById('navOverlay');
+  const drawerClose = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    navDrawer.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    navDrawer.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  navOverlay.addEventListener('click', closeDrawer);
+  navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+  // --- Menu Tabs ---
+  function switchTab(id) {
+    document.querySelectorAll('.menu-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.tab === id);
+    });
+    document.querySelectorAll('.menu-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'panel-' + id);
+    });
+  }
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+
+  // --- FAQ Accordion ---
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // --- Scroll Reveal ---
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // --- Active nav on scroll ---
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.opacity = a.getAttribute('href') === '#' + current ? '1' : '';
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
