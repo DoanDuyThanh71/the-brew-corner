@@ -1805,6 +1805,27 @@
   }
 </script>
 <script src="https://dify.n8n71.com/embed.min.js" defer></script>
+<script>
+  (function() {
+    function fixChatWindow() {
+      const win = document.getElementById('dify-chatbot-bubble-window');
+      if (win) {
+        win.style.setProperty('position', 'fixed', 'important');
+        win.style.setProperty('bottom', '80px', 'important');
+        win.style.setProperty('right', '20px', 'important');
+        win.style.setProperty('left', 'auto', 'important');
+        win.style.setProperty('top', 'auto', 'important');
+        win.style.setProperty('width', '380px', 'important');
+        win.style.setProperty('height', '600px', 'important');
+        win.style.setProperty('max-width', 'calc(100vw - 40px)', 'important');
+        win.style.setProperty('max-height', 'calc(100vh - 100px)', 'important');
+      }
+    }
+    const observer = new MutationObserver(fixChatWindow);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+    document.addEventListener('click', function() { setTimeout(fixChatWindow, 50); });
+  })();
+</script>
 
 </body>
 </html>
